@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF8">
+  <meta name="viewport" content="width=devicewidth, initialscale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>PROJECT ANYON Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sansserif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: #333;
+      font-size: 15px !important;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    h2,
+    h3 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-top: 20px;
+    }
+
+    p,
+    ul,
+    ol {
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+      /* border: 1px solid #ddd; */
+    }
+
+    pre {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>PROJECT ANYON Documentation</h1>
+
+    <h2>Prerequisites</h2>
+    <p>Before you begin, ensure you have the following installed:</p>
+    <ul>
+      <li><strong>Python:</strong> The application runs on python. If you haven't installed it yet, you can download by
+        searching on google.</li>
+
+    </ul>
+
+    <h2>Installation</h2>
+    <ol>
+      <li><strong>Clone the Repository:</strong></li>
+      <pre>
+        <code>git clone https://github.com/Nwafor6/ChatappFE.git
+        cd &lt;projectfolder&gt;
+      </code>
+    </pre>
+    </ol>
+
+    <h2>API Endpoints and Workflow</h2>
+
+    <h3>Signup Workflow</h3>
+    <p>
+      The project Anyon has two registration enpoint first which is this "api/register/" and the other which is the
+      "api/sign-with-google/". The "api/register/"; This enpoint is used to register users who wants to sign up into the
+      platform using the signup option using their email and password. After a successful registration, a success messge
+      telling them a token has been sent
+      to their mail and the users details is also attached to the response. The verification token will be used to
+      verify their account.
+    </p>
+    <p>
+      The "api/sign-with-google/", This enpoint is used to register users who wants to sign up into the platform using 
+      the signin with google option using their gmail account. After a successful registration, the refresh, 
+      access and user details is returned as a response. 
+    </p>
+    <ul>
+      <li> This users who uses this enpoint do not require account verification. Their accounts are auto verified from google.</li>
+       <li> This enpoint signs the up and log them in at first request. At subsequent request, the enpoint only signs then in.</li>
+    </ul>
+
+    <h4>"api/register/": Register a new user using email</h4>
+    <p>See parameter values example below:</p>
+    <pre>
+        <code>
+          {
+              "email": "email@example.com",
+              "password": "password",
+              "firstname": "Glory",
+              "lastname": "Ebube"
+          }
+      </code>
+    </pre>
+
+    <h4>Response </h4>
+    </h4>
+    <pre>
+      <code>
+        {
+            "detail": "A token has been sent to your mail",
+            "user": {
+                "id": 22,
+                "email": "nwafor13@gmail.com",
+                "firstname": "Glory",
+                "lastname": "Ebube",
+                "has_2fa": false,
+                "twofa_type": "none",
+                "signup_type": "email",
+                "totp_url": null,
+                "date_joined": "20231120T12:16:22.814990Z",
+                "last_login": null
+            }
+        }
+            
+      </code>
+  </pre>
+
+    <h4>POST /api/signwithgoogle/: Register a new user using google </h4>
+    see paramter values example below.
+
+    <pre>
+      <code>
+     
+        {
+           "email":"email@example.com",
+           "firstname":"Glory",
+           "lastname":"Ebube"
+        }
+  
+      </code>
+    </pre>
+
+    <h4>Response </h4>
+    </h4>
+    <pre>
+      <code>
+     
+        {
+           "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwMzkzOTE3OSwiaWF0IjoxNzAwNDgzMTc5LCJqdGkiOiI0NTM2ZTVhM2M1ZWM0ODI1YTYwN2JiODRhMTZiMGJlZCIsInVzZXJfaWQiOjI0fQ.eSFmjUFYnXVlBPUClNeZNmizvlK8CrYZEBmcqNH6fmA",
+           "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzMDc1MTc5LCJpYXQiOjE3MDA0ODMxNzksImp0aSI6ImE5MTM5NzMzZWQzYjRkOTQ4YzcwZDQ1YzU4Zjk1Nzg5IiwidXNlcl9pZCI6MjR9.9lB0ITiSXFqQcBTslM9cZZjLjOYMVJ9iD__BsJsEvlg",
+           "user": {
+              "id": 24,
+              "email": "nwafor16@gmail.com",
+              "firstname": "Glory",
+              "lastname": "Ebube",
+              "has_2fa": false,
+              "twofa_type": "none",
+              "signup_type": "google",
+              "totp_url": null,
+              "date_joined": "20231120T12:26:14.943569Z",
+              "last_login": "20231120T12:26:14.943341Z"
+           }
+        }
+      </code>
+    </pre>
+
+    <h4>Resend token </h4>
+    Users who did not get verification token can request for a resend of the verification token using this
+    enpoint sending their email as a params.
+
+    <h4>PUT /api/register/?email=email@example.com </h4>
+
+    <h4> Response </h4>
+    </h4>
+    <pre>
+      <code>
+
+        "Token Resent"
+
+     </code>
+    </pre>
+
+    <h4> verify token .</h4>
+
+    Verification token sent to email signup user, is sent to this enpoint to activate the users account.
+
+    <h4>PUT /api/verify_token/ </h4>
+
+    <h4>
+      <pre>
+      <code>
+
+        {
+            "token":"123456",
+            "user_email":"example@.com"
+        }
+
+     </code>
+    </pre>
+      <h4> Response </h4>
+    </h4>
+    <pre>
+      <code>
+
+        {
+            "detail": "Account verifed."
+        }
+
+     </code>
+    </pre>
+
+    <h4> Signin Enpoint </h4>
+
+    <h4> Workflow. </h4>
+
+    There exists two enpoint for sigin into the platform. The first which is with the
+    user's email and password and the otger which is with google.
+
+    <h4>POST /api/login/</h4>
+    see paramter values example below.
+
+    <pre>
+      <code>
+        
+            {
+              "email":"email@example.com",
+              "password":"password"
+            }
+
+       </code>
+    </pre>
+
+    <h4> Response </h4>
+    <pre>
+      <code>
+        
+            {
+              "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwMzkzOTE3OSwiaWF0IjoxNzAwNDgzMTc5LCJqdGkiOiI0NTM2ZTVhM2M1ZWM0ODI1YTYwN2JiODRhMTZiMGJlZCIsInVzZXJfaWQiOjI0fQ.eSFmjUFYnXVlBPUClNeZNmizvlK8CrYZEBmcqNH6fmA",
+              "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzMDc1MTc5LCJpYXQiOjE3MDA0ODMxNzksImp0aSI6ImE5MTM5NzMzZWQzYjRkOTQ4YzcwZDQ1YzU4Zjk1Nzg5IiwidXNlcl9pZCI6MjR9.9lB0ITiSXFqQcBTslM9cZZjLjOYMVJ9iD__BsJsEvlg",
+              "user": {
+                  "id": 24,
+                  "email": "nwafor16@gmail.com",
+                  "firstname": "Glory",
+                  "lastname": "Ebube",
+                  "has_2fa": false,
+                  "twofa_type": "none",
+                  "signup_type": "email",
+                  "totp_url": null,
+                  "date_joined": "20231120T12:26:14.943569Z",
+                  "last_login": "20231120T12:26:14.943341Z"
+              }
+            }
+
+       </code>
+    </pre>
+
+    <h4> Set up 2FA </h4>
+
+    <h4> Workflow. </h4>
+
+    Setup 2fa for user account. The available options are [email, authapps, sms].
+
+    The "email" turns on email 2fa on
+    The "authapps" turns on authapps 2fa option.
+    The "sms" turns on sms 2fa option.
+
+    2FA  cannot be turned off but can be changed or returned to the default method (email 2fa).To  change to a new 2fa method,use the same enpoint which same action key.
+
+    <h4> authapp </h4>
+
+      <h4>POST /api/2fa_on_off/ <h4>
+          see paramter values example below.
+
+          <pre>
+      <code>
+        
+            {
+              "action":"authapps"
+            }
+
+       </code>
+    </pre>
+
+          <h4> Response </h4>
+          <pre>
+      <code>
+        
+            {
+              "detail": "2FA turn on successsfully",
+              "qr_url": "media/nwafor2@gmail.com_totp_qr.png",
+              "user": {
+                  "id": 11,
+                  "email": "nwafor2@gmail.com",
+                  "firstname": "Glory",
+                  "lastname": "Ebube",
+                  "has_2fa": true,
+                  "twofa_type": "authapps",
+                  "signup_type": "none",
+                  "totp_url": "/media/media/nwafor2%40gmail.com_totp_qr.png",
+                  "date_joined": "20231116T08:58:03.923828Z",
+                  "last_login": "20231120T12:42:46.457235Z"
+              }
+            }
+
+       </code>
+    </pre>
+
+          <h4> Sigin with 2fa </h4>
+
+          Users who has set 2FA on from their dashboard, are required to provide the token via this endpoint
+
+          <h4>
+            <h4> Workflow.
+              The users has to use the login enpoint, and this will trigger the token which will be sent to their email
+              for "email 2fa" and phone number for "sms 2fa". User with authapps, will have to get the token from their
+              authentication application.
+
+              <h4> authapp </h4>
+
+              <h4>POST /api/loginwith2fa/ <h4>
+                  see paramter values example below.
+
+                  <pre>
+      <code>
+        
+            {
+            "email":"nwafor2@gmail.com",
+            "password":"1234",
+            "token":"779416"
+            }
+       </code>
+    </pre>
+
+                  <h4> Response </h4>
+                  <pre>
+      <code>
+
+            {
+                  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwMzkzOTE3OSwiaWF0IjoxNzAwNDgzMTc5LCJqdGkiOiI0NTM2ZTVhM2M1ZWM0ODI1YTYwN2JiODRhMTZiMGJlZCIsInVzZXJfaWQiOjI0fQ.eSFmjUFYnXVlBPUClNeZNmizvlK8CrYZEBmcqNH6fmA",
+                  "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzMDc1MTc5LCJpYXQiOjE3MDA0ODMxNzksImp0aSI6ImE5MTM5NzMzZWQzYjRkOTQ4YzcwZDQ1YzU4Zjk1Nzg5IiwidXNlcl9pZCI6MjR9.9lB0ITiSXFqQcBTslM9cZZjLjOYMVJ9iD__BsJsEvlg",
+                  "user": {
+                    "id": 24,
+                    "email": "nwafor16@gmail.com",
+                    "firstname": "Glory",
+                    "lastname": "Ebube",
+                    "has_2fa": false,
+                    "twofa_type": "none",
+                    "signup_type": "email",
+                    "totp_url": null,
+                    "date_joined": "20231120T12:26:14.943569Z",
+                    "last_login": "20231120T12:26:14.943341Z"
+                  }
+              }
+
+       </code>
+    </pre>
+
+                  <h4> PROFILE </h4>
+                  After a successful login an activation, users are directed to their dashboard where they can update
+                  their profile as please.
+
+                  <h4>PUT /api/profile: </h4>
+
+                  <pre>
+      <code>
+        
+            {
+              "address":"Abujeeee",
+              "paypal_address":"sdf",
+              "profile_img":"image",
+              "phone":"!23456789",
+              "proof_of_id":"file",
+              "proof_of_address":"file",
+              "bank_name":"fcmb",
+              "account_number":"2345678"
+            }
+
+       </code>
+    </pre>
+
+                  <h4> Response </h4>
+                  <pre>
+      <code>
+
+                  {
+                  "detail": {
+                    "user": 11,
+                    "address": "Abujeeee",
+                    "referral_code": "",
+                    "profile_img": null,
+                    "phone": null,
+                    "proof_of_id": null,
+                    "proof_of_address": null,
+                    "bank_name": null,
+                    "account_number": null,
+                    "paypal_address": "sdf"
+                  },
+                  "user": {
+                    "id": 11,
+                    "email": "nwafor2@gmail.com",
+                    "firstname": "Glory",
+                    "lastname": "Ebube",
+                    "has_2fa": true,
+                    "twofa_type": "authapps",
+                    "signup_type": "none",
+                    "totp_url": "/media/media/nwafor2%40gmail.com_totp_qr.png",
+                    "date_joined": "20231116T08:58:03.923828Z",
+                    "last_login": "20231120T12:42:46.457235Z"
+                  }
+            }
+
+       </code>
+    </pre>
+
+                  <h4>GET /api/profile: </h4>
+
+                  <h4> Response </h4>
+                  <pre>
+      <code>
+
+                  {
+                  "detail": {
+                    "user": 11,
+                    "address": "Abujeeee",
+                    "referral_code": "",
+                    "profile_img": null,
+                    "phone": null,
+                    "proof_of_id": null,
+                    "proof_of_address": null,
+                    "bank_name": null,
+                    "account_number": null,
+                    "paypal_address": "sdf"
+                  },
+                  "user": {
+                    "id": 11,
+                    "email": "nwafor2@gmail.com",
+                    "firstname": "Glory",
+                    "lastname": "Ebube",
+                    "has_2fa": true,
+                    "twofa_type": "authapps",
+                    "signup_type": "none",
+                    "totp_url": "/media/media/nwafor2%40gmail.com_totp_qr.png",
+                    "date_joined": "20231116T08:58:03.923828Z",
+                    "last_login": "20231120T12:42:46.457235Z"
+                  }
+            }
+
+       </code>
+    </pre>
+
+                  <h4> Update password from Dashbaord </h4>
+                  <h4>POST /api/updatepassworddashboard/ </h4>
+
+                  <pre>
+      <code>
+
+        {
+            "current_password":"12345",
+            "new_password1":"1234",
+            "new_password2":"1234"
+        }
+
+
+     </code>
+    </pre>
+
+                  <h4> Response </h4>
+
+                  <pre>
+      <code>
+
+        {
+            "detail": "Password updated successfully"
+        }
+
+     </code>
+    </pre>
+
+                  <h4> Forgotten password </h4>
+
+                  The reset password or forgotten password can be completed in 3 steps which include;,
+                  Request for password reset token
+                  confirm/check token validity
+                  update password if reset token is valid
+
+                  Note: The reset token is only valid for 10mins after which it becomes invalid by default and the users
+                  would have to generate another token.
+
+                  <h4>
+                    <h4> Step One: REQUEST RESET TOKEN
+
+                      <h4>POST /api/resetpassword/ </h4>
+
+                      <pre>
+      <code>
+
+        {
+            "email":"nwafor2@gmail.com"
+        }
+
+
+     </code>
+    </pre>
+
+                      <h4> Response </h4>
+
+                      <pre>
+      <code>
+
+        {
+            "detail": "Reset password token has been sent to your email. Token will expire in 10mins"
+        }
+
+     </code>
+    </pre>
+
+                      <h4> Step Two: CONFIRM RESET TOKEN </h4>
+
+                      NOTE: Step two can be skipped to step three, since step3 also validates token before updating the
+                      user's password.
+
+                      <h4>GET /api/resetpassword/?email=nwafor2@gmail.com&token=72696964<h4>
+
+
+                          <h4> Response </h4> 200
+
+                          <pre>
+      <code>
+
+        {
+            "detail": "OK"
+        }
+
+     </code>
+    </pre>
+
+                          <h4> Response </h4> 400
+
+                          <pre>
+      <code>
+
+        {
+            "detail": "Invalid token"
+        }
+
+     </code>
+    </pre>
+
+                          <h4>
+                            <h4> Step Three: UPDATE PASSWORD
+
+                              <h4>PUT /api/resetpassword/<h4>
+
+                                  <pre>
+      <code>
+
+        {
+            "email":"nwafor2@gmail.com",
+            "token":"72696964",
+            "new_password1":"1234",
+            "new_password2":"1234"
+        }
+
+     </code>
+    </pre>
+
+                                  <h4> Response </h4>
+
+                                  <pre>
+      <code>
+
+        {
+            "detail": "Password updated successfully"
+        }
+
+     </code>
+    </pre>
+                                  <h4> Other error Response </h4>s
+                                  <h4> Response </h4> 400
+
+                                  Invalid token or expired token
+
+                                  <pre>
+      <code>
+
+        {
+            "detail": "Invalid token"
+        }
+
+     </code>
+    </pre>
+
+                                  <h4> Response </h4> 400
+
+                                  If new passwords do not match
+
+                                  <pre>
+      <code>
+
+        {
+            "detail": "new_password1 and new_passowrd2 must match"
+        }
+
+     </code>
+    </pre>
+
+                                  <h4> Response </h4> 400
+
+                                  If a wrong email is attached to the token
+
+                                  <pre>
+      <code>
+
+        {
+            "detail": "User with this email not found."
+        }
+
+     </code>
+    </pre>
+
+
+
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>
